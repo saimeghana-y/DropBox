@@ -1,0 +1,46 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=*meluha*
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=*meluha*
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    depends_on:
+      - mongodb
+
+  backend:
+    build: ./backend
+    container_name: file-storage-backend
+    restart: always
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+      - uploads_data:/usr/src/app/uploads
+    environment:
+      - MONGODB_URI=mongodb://admin:*meluha*@mongodb:27017/file-storage?authSource=admin
+      - PORT=5001
+      - JWT_SECRET=your_jwt_secret_key
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data:
+  uploads_data: 
