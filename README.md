@@ -20,6 +20,34 @@ SimpleBox is a simplified Dropbox-like application that allows users to upload, 
 - **State Management**: React Context API
 - **Docker**: For containerization and easy deployment
 
+## Running the Application with Docker
+
+To run the application using Docker, follow these steps:
+
+1. **Ensure Docker is Installed**: Make sure you have Docker installed on your machine. You can download it from [Docker's official website](https://www.docker.com/get-started).
+
+2. **Clone the Repository**: If you haven't already, clone the repository to your local machine:
+   ```bash
+   git clone https://github.com/yourusername/SimpleBox.git
+   cd SimpleBox
+   ```
+
+3. **Build the Docker Images**: Navigate to the root of the project and run the following command to build the Docker images:
+   ```bash
+   docker-compose build
+   ```
+
+4. **Start the Docker Containers**: After building the images, start the containers using:
+   ```bash
+   docker-compose up -d
+   ```
+
+5. **Access the Application**: Open your browser and go to [http://localhost:3000](http://localhost:3000) to see the application running.
+
+6. **Stopping the Application**: To stop the running containers, use:
+   ```bash
+   docker-compose down
+   ```
 
 ## API Endpoints
 - **POST** `/api/auth/register`: Register a new user
